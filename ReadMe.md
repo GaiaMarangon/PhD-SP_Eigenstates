@@ -92,11 +92,13 @@ This folder contains the code to elaborate the results obtained from `TestSensib
   
 ## 5. The `ExcitedScalings` folder
 This folder contains the systematic analysis on the eigenstates to characterize how they scale with the excitation index $n$. 
-- the `NumParam.py` file summarized all the heuristic laws derived in the analysis and the associated numerical values.
+- the `NumParam.py` file summarizes all the heuristic laws derived in the analysis and the associated numerical values.
 - the `excitedScalings.ipynb` notebook collects all the code performing the analysis.
 
 ### The `excitedScalings.ipynb` notebook
-The first cell is necessary for the setting. Each other cell of this notebook is designed to be independent from the others. The structure is the following:
+The notebook uses the results printed by the `PrintResults` code and analyzes them to characterize the scaling of the eigenstates with the excitation index $n$. 
+The first cell is necessary for the setting. Each other cell of this notebook is designed to be independent from the others. 
+The structure is the following:
 - eigenvalues 
 - plot of the eigenstate
   - single eigenstate
