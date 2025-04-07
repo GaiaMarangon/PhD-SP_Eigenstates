@@ -1,4 +1,10 @@
+#Python pycache 
+ExcitedScalings/__pycache__/
+#Results and Figures
 ComputeStationary/results_NormOne
 ElaborateResults/Figures_NormOne
 PrintResults/NormOne
+ExcitedScalings/Figures
+ExcitedScalings/Figures_SmallFont
+#Others
 *.txt
