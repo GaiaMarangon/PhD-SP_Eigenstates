@@ -120,19 +120,26 @@ This folder contains the code to analyze the excited stationary states in presen
 
 ### 6.1. The `OneSource` folder
 The `oneSource` folder computes the excited stationary states of the Schr\"odinger-Poisson problem in presence of  one external source. Three different  external density profiles are tested:
-- an exponential profile: $\rho_{exp}(r) = a e^{-\frac{r}{r_0}}$
+- an exponential profile:
+  ```math
+  \rho_{exp}(r) = a e^{-\frac{r}{r_0}}
+  ```
 - a hard sphere profile: 
-    $ \rho_{hs}(r) = 
+  ```math
+   \rho_{hs}(r) = 
     \begin{cases}
         a \qquad r\le r_0\\
         0 \qquad r > r_0\\        
-    \end{cases} $
+    \end{cases}
+  ```
 - a truncated Plummer potential (as in [Ji, Sin - 1994](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.50.3655)):
-    $\rho_{tp}(r) = 
+  ```math
+  \rho_{tp}(r) = 
     \begin{cases}
-        a \Big(\big(\frac{r}{r_0}\big)^2+1\Big)^{-5/2} \qquad\,\,\,\, r\le r_0\\
+        a \Big(\Big(\frac{r}{r_0}\Big)^2+1\Big)^{-5/2} \qquad\,\,\,\, r\le r_0\\
         \rho_{tp}(r_0) e^{r_0-r} \qquad\qquad\quad r > r_0\\ 
-    \end{cases}$
+    \end{cases}
+  ```
 
 For each of these profile, the two parameters $r_0$ and $a$ are varied, and the corresponding density profile, the eigenfunction, the eigenpotential, the eigenvelocity, and the total velocity are computed and plotted as follows:
 - the eigenstate $(f_n(r),\phi_n(r))$ solves the stationary Schr\"odinger-Poisson problem with the unitary normalization on the eigenfunction:
