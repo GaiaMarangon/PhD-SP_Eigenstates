@@ -119,7 +119,7 @@ The structure is the following:
 This folder contains the code to analyze the excited stationary states in presence of one external source (`OneSource`).
 
 ### 6.1. The `OneSource` folder
-The `oneSource` folder computes the excited stationary states of the Schr\"odinger-Poisson problem in presence of  one external source. Three different  external density profiles are tested:
+The `oneSource` folder computes the excited stationary states of the Schroedinger-Poisson problem in presence of  one external source. Three different  external density profiles are tested:
 - an exponential profile:
   ```math
   \rho_{exp}(r) = a e^{-\frac{r}{r_0}}
@@ -142,7 +142,7 @@ The `oneSource` folder computes the excited stationary states of the Schr\"oding
   ```
 
 For each of these profile, the two parameters $r_0$ and $a$ are varied, and the corresponding density profile, the eigenfunction, the eigenpotential, the eigenvelocity, and the total velocity are computed and plotted as follows:
-- the eigenstate $(f_n(r),\phi_n(r))$ solves the stationary Schr\"odinger-Poisson problem with the unitary normalization on the eigenfunction:
+- the eigenstate $(f_n(r),\phi_n(r))$ solves the stationary Schroedinger-Poisson problem with the unitary normalization on the eigenfunction:
 ```math
  \begin{cases}
         \triangle f = (\varepsilon + 2\phi ) f \\
