@@ -7,5 +7,7 @@ PrintResults/NormOne
 ExcitedScalings/Figures
 ExcitedScalings/Figures_SmallFont
 WithSource/OneSource/output
+#Backups
+ExcitedScalings/excitedScalings_backupJMP.ipynb
 #Others
 *.txt
