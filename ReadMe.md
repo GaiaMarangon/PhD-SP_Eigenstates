@@ -5,8 +5,9 @@ This folder contains the codes for computing and testing the implementation of t
 2. `TestSensibility` contains the code to compute the $n$-th stationary state, varying the discretization step, so to test the sensibility of the algorithm to this parameter. Computation times are pretty wide, to allow for good resolutions. Results obtained from highest discretisations are used as a reference for elaboration and printing. Results are saved as .mat files.
 3. `PrintResults` contains the code to print to .dat file the results for the $n$-th eigenstate.  
 4. `ElaborateResults` contains the code to elaborate (plot and fit) the results obtained from `TestSensibility` or `ComputeStationary`, for the $n$-th stationary state. All plots are saved in the `Figures` subfolder.   
-Notice that all the elaborations (except for slices plots) are repeated and refined in a separated PYTHON code. 
-5. `WithSource` contains the code to analyze the excited stationary states in presence of one external source (`OneSource`).
+Notice that all the elaborations (except for slices plots) are repeated and refined in the `ExcitedScalings` code.
+5. `ExcitedScalings` contains the systematic analysis on the eigenstates to characterize how they scale with the excitation index $n$.
+6. `WithSource` contains the code to analyze the excited stationary states in presence of one external source (`OneSource`).
 
 ## 1. The `ComputeStationary` folder
 This folder contains the code to compute the $n$-th eigenstate, with fixed discretization step. Discretization steps are quite rough, to allow for faster computation times (about 60s). Results are saved as .mat files.
@@ -87,14 +88,37 @@ This folder contains the code to elaborate the results obtained from `TestSensib
   - fit of local extrema (peaks) of the eigenfunction, in linear scale and in log-log scale.
   - mid-range fitted velocity curve.
 
+Notice that all results elaborations (except for slices plots) are repeated and refined in the  `ExcitedScalings` folder. 
+  
+## 5. The `ExcitedScalings` folder
+This folder contains the systematic analysis on the eigenstates to characterize how they scale with the excitation index $n$. 
+- the `NumParam.py` file summarizes all the heuristic laws derived in the analysis and the associated numerical values.
+- the `excitedScalings.ipynb` notebook collects all the code performing the analysis.
 
-  Notice that all results elaborations (except for slices plots) are repeated and refined in a separated `PYTHON` code. 
+### 5.1. The `excitedScalings.ipynb` notebook
+The notebook uses the results printed by the `PrintResults` code and analyzes them to characterize the scaling of the eigenstates with the excitation index $n$. 
+The first cell is necessary for the setting. Each other cell of this notebook is designed to be independent from the others. 
+The structure is the following:
+- eigenvalues 
+- plot of the eigenstate
+  - single eigenstate
+  - sample eigenstates
+  - magnified views
+- eigenfunctions
+  - nodes patterns scaling laws
+  - local extrema scaling laws
+  - approximate eigenfunction
+- eigenpotential
+- eigenvelocity
+  - scaling laws
+  - universality
+  - approximate eigenvelocity     
+- WKB approximation 
 
-
-## 5. The `WithSource` folder
+## 6. The `WithSource` folder
 This folder contains the code to analyze the excited stationary states in presence of one external source (`OneSource`).
 
-### 5.1. The `OneSource` folder
+### 6.1. The `OneSource` folder
 The `oneSource` folder computes the excited stationary states of the Schr\"odinger-Poisson problem in presence of  one external source. Three different  external density profiles are tested:
 - an exponential profile: $\rho_{exp}(r) = a e^{-\frac{r}{r_0}}$
 - a hard sphere profile: 
