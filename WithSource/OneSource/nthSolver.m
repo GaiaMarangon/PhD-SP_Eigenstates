@@ -4,7 +4,8 @@ function [e1,r,phi1,f] = nthSolver(n,hin,phiParams,extRhoNames,epsPhi,tolInt,tol
     %   n = nodes for desired eigenvector 
     % -domain:
     %   h = grid stepsize
-    %   dR = radius increment
+    % -source:
+    %   phiParams = array Nx2, with each row = [r0,a] is a source 
     % -tolerances:
     %   epsPhi = for regularizing 1/r at r=0
     %   tolInt = for finding const eigval, in internal iter
@@ -13,10 +14,14 @@ function [e1,r,phi1,f] = nthSolver(n,hin,phiParams,extRhoNames,epsPhi,tolInt,tol
     %   maxiterExt maximum number of external iterations
 
     %output data:
-    %   eigval = eigenvalue epsilon, = -1/2 * computed eigenvalue
+    %   e1 = eigenvalue 
     %   r = final domain (may vary in extension)
     %   phi1 = solution for potential
     %   f = solution for matter field
+
+    %NOTE: 
+    % input parameters (phiParams) need to be in 4pi-Norm normalization
+    % the output is in 4pi-Norm normalization
     %---------------------------------------------------------------------
     
     %--- PARAMETERS ------------------------------------------------------
