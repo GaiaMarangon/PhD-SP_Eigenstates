@@ -56,38 +56,45 @@ The folder includes:
       \triangle \phi =  |f|^2 \\
   \end{cases}
 ```
-- `main_reportSensitivity.m` file. It analyzes the five different versions of the $n$-th eigenstate, each obtained with a different mesh size $\{h_i\}_{i=1}^5$ (decreasing with $i$), to check the sensitivity of the solution to this parameter. Some reference quantities and compared, computing their difference for successive values of $h$, relative to the value of that quantity obtained with higher refinement:
+- `main_reportSensitivity.m` file. It analyzes the five different versions of the $n$-th eigenstate, each obtained with a different mesh size $\\{ h_i \\}_{i=1}^5$ (decreasing with $i$), to check the sensitivity of the solution to this parameter. Some reference quantities and compared, computing their difference for successive values of $h$, relative to the value of that quantity obtained with higher refinement:
   - Relative Difference of  the eigenvalues:
-  ```math
-    \Delta \varepsilon_n (h_i) := \frac{\varepsilon_n(h_i)-\varepsilon_n(h_{i-1})}{\varepsilon_n(h_5)}\,,
-    \qquad \text{for }i=2,\dots,5\,.
-  ```
+```math
+\Delta \varepsilon_n (h_i) := \frac{\varepsilon_n(h_i)-\varepsilon_n(h_{i-1})}{\varepsilon_n(h_5)}\,,\qquad \text{for }i=2,\dots,5
+```
   - Relative Difference of the outermost local extremum of the eigenfunction, $(r_{Out}, f_{Out}=|f(r_{Out})|)$:
-  ```math
-  \Delta r_{Out} (h_i) := \frac{r_{Out}(h_i)-r_{Out}(h_{i-1})}{r_{Out}(h_5)}\,,
-    \qquad \text{for }i=2,\dots,5 \\
-    \Delta f_{Out} (h_i) := \frac{f_{Out}(h_i)-f_{Out}(h_{i-1})}{f_{Out}(h_5)}\,,
-    \qquad \text{for }i=2,\dots,5
-  ```
+```math
+\Delta r_{Out} (h_i) := \frac{r_{Out}(h_i)-r_{Out}(h_{i-1})}{r_{Out}(h_5)}\,,
+\qquad \text{for }i=2,\dots,5
+```
+```math
+\Delta f_{Out} (h_i) := \frac{f_{Out}(h_i)-f_{Out}(h_{i-1})}{f_{Out}(h_5)}\,,
+\qquad \text{for }i=2,\dots,5
+```
   - Relative Difference of the outermost local extremum of the eigenvelocity, $(r_{Out}, v_{Out}=|v(r_{Out})|)$:
-  ```math
-  \Delta r_{Out} (h_i) := \frac{r_{Out}(h_i)-r_{Out}(h_{i-1})}{r_{Out}(h_5)}\,,
-    \qquad \text{for }i=2,\dots,5 \\
-    \Delta v_{Out} (h_i) := \frac{v_{Out}(h_i)-v_{Out}(h_{i-1})}{v_{Out}(h_5)}\,,
-    \qquad \text{for }i=2,\dots,5
-  ```
+```math
+\Delta r_{Out} (h_i) := \frac{r_{Out}(h_i)-r_{Out}(h_{i-1})}{r_{Out}(h_5)}\,,
+\qquad \text{for }i=2,\dots,5
+```
+```math
+\Delta v_{Out} (h_i) := \frac{v_{Out}(h_i)-v_{Out}(h_{i-1})}{v_{Out}(h_5)}\,,
+\qquad \text{for }i=2,\dots,5
+```
   - Relative Difference of  the innermost local extremum of the eigenvelocity, $(r_{inn}, v_{inn})$:
-  ```math
-  \Delta r_{inn} (h_i) &:= \frac{r_{inn}(h_i)-r_{inn}(h_{i-1})}{r_{inn}(h_5)}\,,
-    \qquad \text{for }i=2,\dots,5\\
-    \Delta v_{inn} (h_i) &:= \frac{v_{inn}(h_i)-v_{inn}(h_{i-1})}{v_{inn}(h_5)}\,,
-    \qquad \text{for }i=2,\dots,5
-  ```
+```math
+\Delta r_{inn} (h_i) := \frac{r_{inn}(h_i)-r_{inn}(h_{i-1})}{r_{inn}(h_5)}\,,
+\qquad \text{for }i=2,\dots,5
+```
+```math
+\Delta v_{inn} (h_i) := \frac{v_{inn}(h_i)-v_{inn}(h_{i-1})}{v_{inn}(h_5)}\,,
+\qquad \text{for }i=2,\dots,5
+```
   - Relative Difference of Local Maxima of Eigenfunction (average):
-  ```math
-  \frac{\sum_j |r_{max,j}(h_i)-r_{max,j}(h_{i-1})|}{ n_{max} }  \frac{1}{ r_{Out}} \\
-  \frac{\sum_j |f_{max,j}(h_i)-f_{max,j}(h_{i-1})|}{ n_{max}  } \frac{1}{f_{0}}
-  ```
+```math
+\frac{\sum_j |r_{max,j}(h_i)-r_{max,j}(h_{i-1})|}{ n_{max} }  \frac{1}{ r_{Out}}
+```
+```math
+\frac{\sum_j |f_{max,j}(h_i)-f_{max,j}(h_{i-1})|}{ n_{max}  } \frac{1}{f_{0}}
+```
   - Time elapsed while computing the solution.
 
 All the results are plotted and printed to log files.
