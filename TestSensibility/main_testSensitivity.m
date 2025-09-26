@@ -37,7 +37,7 @@ else
 end
 
 %--- INITIAL SETTING -----------------------------------------------------
-%nr of sensibility tests, for each k
+%nr of sensitivity tests, for each k
 nSens = length(h);
 %setting output
 eigval = cell(nSens,1);

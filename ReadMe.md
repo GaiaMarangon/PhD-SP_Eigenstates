@@ -2,9 +2,9 @@
 
 This folder contains the codes for computing and testing the implementation of the eigenstates of the Schroedinger-Poisson problem.
 1. `ComputeStationary` contains the code to compute the $n$-th eigenstate, with fixed discretization step. Discretization steps are quite rough, to allow for faster computation times (about 60s). Results are saved as .mat files.
-2. `TestSensibility` contains the code to compute the $n$-th stationary state, varying the discretization step, so to test the sensibility of the algorithm to this parameter. Computation times are pretty wide, to allow for good resolutions. Results obtained from highest discretisations are used as a reference for elaboration and printing. Results are saved as .mat files.
+2. `TestSensitivity` contains the code to compute the $n$-th stationary state, varying the discretization step, so to test the sensitivity of the algorithm to this parameter. Computation times are pretty wide, to allow for good resolutions. Results obtained from highest discretisations are used as a reference for elaboration and printing. Results are saved as .mat files.
 3. `PrintResults` contains the code to print to .dat file the results for the $n$-th eigenstate.  
-4. `ElaborateResults` contains the code to elaborate (plot and fit) the results obtained from `TestSensibility` or `ComputeStationary`, for the $n$-th stationary state. All plots are saved in the `Figures` subfolder.   
+4. `ElaborateResults` contains the code to elaborate (plot and fit) the results obtained from `TestSensitivity` or `ComputeStationary`, for the $n$-th stationary state. All plots are saved in the `Figures` subfolder.   
 Notice that all the elaborations (except for slices plots) are repeated and refined in the `ExcitedScalings` code.
 5. `ExcitedScalings` contains the systematic analysis on the eigenstates to characterize how they scale with the excitation index $n$.
 6. `WithSource` contains the code to analyze the excited stationary states in presence of one external source (`OneSource`).
@@ -43,11 +43,11 @@ Finally, `main_computeStationary.m` gives to option (activated by default) to sc
 ```
 The results are saved as .mat files in the desired notation. 
 
-## 2. The `TestSensibility` folder
-This folder contains the code to compute the $n$-th eigenstatestate varying the discretization step, so to test the sensibility of the algorithm to this parameter. Computation times are pretty wide, to allow for good resolutions. Results obtained from highest discretisations are used as a reference for elaboration and printing. Results are saved as .mat files in the desired subfolder.
+## 2. The `TestSensitivity` folder
+This folder contains the code to compute the $n$-th eigenstatestate varying the discretization step, so to test the sensitivity of the algorithm to this parameter. Computation times are pretty wide, to allow for good resolutions. Results obtained from highest discretisations are used as a reference for elaboration and printing. Results are saved as .mat files in the desired subfolder.
 
 The folder includes:
-- `main_testSensibility.m` file. It computes the $n$-th eigenstate at five different resolutions, and saves all results in a .mat file. The solver is the same as in the `ComputeStationary` folder. As explained for that folder, the output of the solver refers to the norm=$4\pi$ notation. The results are then scaled to match the norm=$1$ notation (this step, performed by default, can optionally be avoided):  
+- `main_testSensitivity.m` file. It computes the $n$-th eigenstate at five different resolutions, and saves all results in a .mat file. The solver is the same as in the `ComputeStationary` folder. As explained for that folder, the output of the solver refers to the norm=$4\pi$ notation. The results are then scaled to match the norm=$1$ notation (this step, performed by default, can optionally be avoided):  
 ```math
   \begin{cases}
       \triangle f = (\varepsilon + 2\phi ) f 
@@ -56,20 +56,47 @@ The folder includes:
       \triangle \phi =  |f|^2 \\
   \end{cases}
 ```
-- `main_reportSensibility.m` file. It analyzes the five different versions of the $n$-th eigenstate, each obtained with a different resolution, to check the sensibility of the solution to this parameter. The analysis includes:
-  - plot, as the discretization step varies, of the eigenvalues;
-  - plot, as the discretization step varies, of the correction ("error") on the eigenvalue, computed with respect to the value obtained with the previous (larger) discretization step;
-  - plot, as the discretization step varies, of the percentage correction ("error") on the position of the local extrema, computed with respect to the value obtained with the previous (larger) discretization step; the corrections are averaged among all the local extrema and expressed relatively to the outermost local maximum;
-  - plot, as the discretization step varies, of the radius enclosing the $95\%$ of the total mass;
-  - plot, as the discretization step varies, of the time elapsed while computing the solution.
+- `main_reportSensitivity.m` file. It analyzes the five different versions of the $n$-th eigenstate, each obtained with a different mesh size $\{h_i\}_{i=1}^5$ (decreasing with $i$), to check the sensitivity of the solution to this parameter. Some reference quantities and compared, computing their difference for successive values of $h$, relative to the value of that quantity obtained with higher refinement:
+  - Relative Difference of  the eigenvalues:
+  ```math
+    \Delta \varepsilon_n (h_i) := \frac{\varepsilon_n(h_i)-\varepsilon_n(h_{i-1})}{\varepsilon_n(h_5)}\,,
+    \qquad \text{for }i=2,\dots,5\,.
+  ```
+  - Relative Difference of the outermost local extremum of the eigenfunction, $(r_{Out}, f_{Out}=|f(r_{Out})|)$:
+  ```math
+  \Delta r_{Out} (h_i) := \frac{r_{Out}(h_i)-r_{Out}(h_{i-1})}{r_{Out}(h_5)}\,,
+    \qquad \text{for }i=2,\dots,5 \\
+    \Delta f_{Out} (h_i) := \frac{f_{Out}(h_i)-f_{Out}(h_{i-1})}{f_{Out}(h_5)}\,,
+    \qquad \text{for }i=2,\dots,5
+  ```
+  - Relative Difference of the outermost local extremum of the eigenvelocity, $(r_{Out}, v_{Out}=|v(r_{Out})|)$:
+  ```math
+  \Delta r_{Out} (h_i) := \frac{r_{Out}(h_i)-r_{Out}(h_{i-1})}{r_{Out}(h_5)}\,,
+    \qquad \text{for }i=2,\dots,5 \\
+    \Delta v_{Out} (h_i) := \frac{v_{Out}(h_i)-v_{Out}(h_{i-1})}{v_{Out}(h_5)}\,,
+    \qquad \text{for }i=2,\dots,5
+  ```
+  - Relative Difference of  the innermost local extremum of the eigenvelocity, $(r_{inn}, v_{inn})$:
+  ```math
+  \Delta r_{inn} (h_i) &:= \frac{r_{inn}(h_i)-r_{inn}(h_{i-1})}{r_{inn}(h_5)}\,,
+    \qquad \text{for }i=2,\dots,5\\
+    \Delta v_{inn} (h_i) &:= \frac{v_{inn}(h_i)-v_{inn}(h_{i-1})}{v_{inn}(h_5)}\,,
+    \qquad \text{for }i=2,\dots,5
+  ```
+  - Relative Difference of Local Maxima of Eigenfunction (average):
+  ```math
+  \frac{\sum_j |r_{max,j}(h_i)-r_{max,j}(h_{i-1})|}{ n_{max} }  \frac{1}{ r_{Out}} \\
+  \frac{\sum_j |f_{max,j}(h_i)-f_{max,j}(h_{i-1})|}{ n_{max}  } \frac{1}{f_{0}}
+  ```
+  - Time elapsed while computing the solution.
 
-All the results are also printed to log files
-The analysis is aimed at judging the quality of the single $n$-th solution, and does not cross-compare the results of the sensibility tests at different values of excitation index $n$.
+All the results are plotted and printed to log files.
+The analysis is aimed at judging the quality of the single $n$-th solution, and does not cross-compare the results of the sensitivity tests at different values of excitation index $n$.
 
 
 ## 3. The `PrintResults` folder
 This folder contains the code to print to file the results obtained for the $n$-th eigenstate. <br>
-The code loads the previously computed solutions from a given input folder. Results may include one solution per file (as from `ComputeStationary` analysis) or more solutions per file (as from `TestSensibility`, where several solutions with different refinements are saved in the same file). In the latter case, only the last (more refined) solution is used for printing. This is considered the preferred data in our analysis. <br>
+The code loads the previously computed solutions from a given input folder. Results may include one solution per file (as from `ComputeStationary` analysis) or more solutions per file (as from `TestSensitivity`, where several solutions with different refinements are saved in the same file). In the latter case, only the last (more refined) solution is used for printing. This is considered the preferred data in our analysis. <br>
 Printed results are saved as .dat files in different subfolders:
   - `neNumData` contains the eigenvalues $\varepsilon(n)$ for different number of nodes $n$, in a unique file
   - `rfNumData` contains the eigenfunctions $f(r)$ for each $n$-th stationary state, in separate files.
@@ -80,7 +107,7 @@ Printed results are saved as .dat files in different subfolders:
 The code allows to select an output folder and it authonomously sets the required subfolders, adding an appropriate text comment in the header of the files.
 
 ## 4. The `ElaborateResults` folder
-This folder contains the code to elaborate the results obtained from `TestSensibility` or `ComputeStationary`, for the $n$-th stationary state. All plots are saved in the desired subfolder. Computed (and plotted) quantities include:
+This folder contains the code to elaborate the results obtained from `TestSensitivity` or `ComputeStationary`, for the $n$-th stationary state. All plots are saved in the desired subfolder. Computed (and plotted) quantities include:
   - velocity curve $v(r)$.
   - eigenfunction $f(r)$, in linear scale and in log-log scale.
   - potential $\phi(f)$.
